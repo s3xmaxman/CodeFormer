@@ -40,10 +40,32 @@ def display_movie(folder, name):
     plt.show()
     plt.close()
 
+# --- video_2_images
+import cv2 
+def video_2_images(video_file, image_dir, image_file):  
 
+    # Initial setting
+    i = 0
+    interval = 1
+    length = 9000  # リミッター
+    
+    cap = cv2.VideoCapture(video_file)
+    fps = cap.get(cv2.CAP_PROP_FPS)  # fps取得
+
+    while(cap.isOpened()):
+        flag, frame = cap.read()  
+        if flag == False:  
+                break
+        if i == length*interval:
+                break
+        if i % interval == 0:    
+           cv2.imwrite(image_dir+image_file % str(int(i/interval)).zfill(6), frame)
+        i += 1 
+    cap.release()
+    return fps, i, interval
+        
 # --- display_mp4 ---
-from IPython.display import display, HTML
-from IPython.display import HTML
+from IPython.display import display, HTML, clear_output
 
 def display_mp4(path):
     from base64 import b64encode
