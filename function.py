@@ -47,7 +47,7 @@ def video_2_images(video_file, image_dir, image_file):
     # Initial setting
     i = 0
     interval = 1
-    length = 18000  # リミッター
+    length = 180000  # リミッター
     
     cap = cv2.VideoCapture(video_file)
     fps = cap.get(cv2.CAP_PROP_FPS)  # fps取得
